@@ -1,0 +1,185 @@
+<section id="projects" class="section-padding">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="section-header text-center mb-5" appScrollReveal>
+      <span class="section-label">Portfolio</span>
+      <h2 class="section-title">My <span class="text-accent">Projects</span></h2>
+      <p class="section-sub">Things I've built — click any card to learn more</p>
+    </div>
+
+    <!-- Filter + Add button row -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-5">
+      <div class="filter-tabs d-flex flex-wrap gap-2">
+        <button *ngFor="let f of filters" class="filter-btn" [class.active]="activeFilter === f.value"
+          (click)="applyFilter(f.value)">
+          {{ f.label }}
+        </button>
+      </div>
+      <button class="btn-add-project" (click)="openAddModal()">
+        <i class="bi bi-plus-lg me-2"></i> Add Project
+      </button>
+    </div>
+
+    <!-- Loading spinner -->
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-accent" role="status"></div>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="row g-4" *ngIf="!loading">
+      <div class="col-md-6 col-lg-4" *ngFor="let p of filtered; trackBy: trackById" appScrollReveal [revealDelay]="0">
+
+        <div class="project-card h-100" [class.featured]="p.featured" (click)="openProject(p)">
+
+          <div class="project-image">
+            <img [src]="p.imageUrl || 'https://images.unsplash.com/photo-1555066931-4365d14431b9?w=600'" [alt]="p.title"
+              loading="lazy">
+            <div class="project-overlay">
+              <span class="overlay-hint"><i class="bi bi-eye me-1"></i> View Details</span>
+            </div>
+            <span class="featured-badge" *ngIf="p.featured">
+              <i class="bi bi-star-fill"></i> Featured
+            </span>
+            <button class="delete-btn" title="Delete project" (click)="deleteProject(p, $event)">
+              <i class="bi bi-trash3"></i>
+            </button>
+          </div>
+
+          <div class="project-body">
+            <span class="project-category">{{ p.category }}</span>
+            <h3 class="project-title">{{ p.title }}</h3>
+            <p class="project-desc">{{ p.description }}</p>
+            <div class="tech-stack mt-auto pt-3">
+              <span class="tech-tag" *ngFor="let t of p.tech.slice(0, 4)">{{ t }}</span>
+              <span class="tech-tag more" *ngIf="p.tech.length > 4">+{{ p.tech.length - 4 }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="col-12" *ngIf="filtered.length === 0">
+        <div class="empty-state">
+          <i class="bi bi-folder2-open"></i>
+          <h4>No projects yet</h4>
+          <p>Click <strong>Add Project</strong> to showcase your work here.</p>
+          <button class="btn-add-project" (click)="openAddModal()">
+            <i class="bi bi-plus-lg me-2"></i> Add Your First Project
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Project Detail Modal -->
+<app-project-modal [project]="selectedProject" (closed)="closeProject()"></app-project-modal>
+
+<!-- Add Project Modal -->
+<div class="add-modal-overlay" *ngIf="showAddModal" (click)="$event.target === $event.currentTarget && closeAddModal()">
+  <div class="add-modal-panel">
+
+    <div class="add-modal-header">
+      <h3><i class="bi bi-plus-circle me-2 text-accent"></i> Add New Project</h3>
+      <button class="close-btn" (click)="closeAddModal()"><i class="bi bi-x-lg"></i></button>
+    </div>
+
+    <div class="add-modal-body">
+      <form [formGroup]="addForm" (ngSubmit)="submitProject()" novalidate>
+        <div class="row g-3">
+
+          <div class="col-12">
+            <label class="form-label">Project Title *</label>
+            <input type="text" class="form-control" formControlName="title" placeholder="e.g. E-Commerce App"
+              [class.is-invalid]="addForm.get('title')?.invalid && addForm.get('title')?.touched">
+            <div class="invalid-feedback">Title is required.</div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Short Description *</label>
+            <textarea class="form-control" rows="2" formControlName="description"
+              placeholder="What does this project do?"
+              [class.is-invalid]="addForm.get('description')?.invalid && addForm.get('description')?.touched">
+            </textarea>
+            <div class="invalid-feedback">Min 10 characters required.</div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Full Description <small class="text-muted">(optional)</small></label>
+            <textarea class="form-control" rows="3" formControlName="longDesc"
+              placeholder="Detailed explanation..."></textarea>
+          </div>
+
+          <div class="col-sm-8">
+            <label class="form-label">Category *</label>
+            <select class="form-control" formControlName="category">
+              <option value="web">Web</option>
+              <option value="backend">Backend</option>
+              <option value="mobile">Mobile</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="col-sm-4 d-flex align-items-end pb-2">
+            <div class="form-check form-switch custom-switch">
+              <input class="form-check-input" type="checkbox" formControlName="featured" id="featuredCheck">
+              <label class="form-check-label" for="featuredCheck">Featured</label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Tech Stack</label>
+            <div class="tech-input-row">
+              <input type="text" class="form-control" [(ngModel)]="techInput" [ngModelOptions]="{standalone: true}"
+                (keydown)="onTechKey($event)" placeholder="Type tech then press Enter or comma…">
+              <button type="button" class="btn-add-tech" (click)="addTech()">Add</button>
+            </div>
+            <div class="tech-tags-preview mt-2" *ngIf="techList.length">
+              <span class="tech-pill" *ngFor="let t of techList">
+                {{ t }}
+                <button type="button" (click)="removeTech(t)"><i class="bi bi-x"></i></button>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Image URL <small class="text-muted">(optional)</small></label>
+            <input type="url" class="form-control" formControlName="imageUrl"
+              placeholder="https://... paste screenshot URL">
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label">Live URL <small class="text-muted">(optional)</small></label>
+            <input type="url" class="form-control" formControlName="liveUrl" placeholder="https://myapp.com">
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label">GitHub URL <small class="text-muted">(optional)</small></label>
+            <input type="url" class="form-control" formControlName="githubUrl"
+              placeholder="https://github.com/balaji50/...">
+          </div>
+
+          <div class="col-12 mt-2">
+            <button type="button" class="btn-submit w-100" (click)="submitProject()">
+
+              <span *ngIf="!adding">
+                <i class="bi bi-cloud-upload me-2"></i>
+                Save Project
+              </span>
+
+              <span *ngIf="adding">
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Saving…
+              </span>
+
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

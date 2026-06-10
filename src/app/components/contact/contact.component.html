@@ -1,0 +1,108 @@
+<section id="contact" class="section-padding">
+  <div class="container">
+
+    <div class="section-header text-center mb-5">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Let's <span class="text-accent">Work Together</span></h2>
+      <p class="section-sub">Have a project in mind? Let's build something great.</p>
+    </div>
+
+    <div class="row g-5 justify-content-center">
+
+      <!-- Info column -->
+      <div class="col-lg-4">
+        <div class="contact-info">
+          <h3 class="mb-4">Contact Info</h3>
+          <div class="info-item">
+            <div class="info-icon"><i class="bi bi-envelope"></i></div>
+            <div>
+              <small>Email</small>
+              <p>balaji.d1879&#64;gmail.com</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+            <div>
+              <small>Location</small>
+              <p>Chennai</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="bi bi-clock"></i></div>
+            <div>
+              <small>Availability</small>
+              <p>Mon – Sat, 9am – 8pm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form column -->
+      <div class="col-lg-7">
+        <div class="contact-form-card">
+
+          <!-- Success message -->
+          <div class="alert-success-card" *ngIf="success">
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <strong>Message sent!</strong><br>
+              <small>I'll get back to you within 24 hours.</small>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!success" novalidate>
+            <div class="row g-3">
+
+              <div class="col-sm-6">
+                <label class="form-label">Name *</label>
+                <input type="text" class="form-control"
+                  [class.is-invalid]="f['name'].invalid && f['name'].touched"
+                  formControlName="name" placeholder="John Doe">
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+
+              <div class="col-sm-6">
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-control"
+                  [class.is-invalid]="f['email'].invalid && f['email'].touched"
+                  formControlName="email" placeholder="john@example.com">
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Subject</label>
+                <input type="text" class="form-control"
+                  formControlName="subject" placeholder="Project inquiry...">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Message *</label>
+                <textarea class="form-control" rows="5"
+                  [class.is-invalid]="f['message'].invalid && f['message'].touched"
+                  formControlName="message" placeholder="Tell me about your project..."></textarea>
+                <div class="invalid-feedback">Message must be at least 10 characters.</div>
+              </div>
+
+              <div class="col-12 mt-2">
+                <button type="submit" class="btn btn-accent w-100" [disabled]="loading">
+                  <span *ngIf="!loading">
+                    <i class="bi bi-send me-2"></i> Send Message
+                  </span>
+                  <span *ngIf="loading">
+                    <span class="spinner-border spinner-border-sm me-2"></span> Sending…
+                  </span>
+                </button>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

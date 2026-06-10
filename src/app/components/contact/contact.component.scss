@@ -1,0 +1,86 @@
+.contact-info {
+  h3 { font-family: var(--font-display); color: #fff; font-weight: 700; }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    .info-icon {
+      width: 44px; height: 44px;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    small { color: rgba(255,255,255,0.4); font-size: 0.75rem; letter-spacing: 0.5px; text-transform: uppercase; }
+    p { color: rgba(255,255,255,0.8); margin: 0.2rem 0 0; font-weight: 500; }
+  }
+}
+
+.contact-form-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+
+  .form-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-control {
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: #fff;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+
+    &::placeholder { color: rgba(255,255,255,0.25); }
+    &:focus {
+      background: rgba(255,255,255,0.07);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+      color: #fff;
+    }
+    &.is-invalid { border-color: #f87171; }
+  }
+
+  .btn-accent {
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    &:hover:not(:disabled) { background: var(--accent-hover); transform: translateY(-1px); }
+    &:disabled { opacity: 0.7; }
+  }
+}
+
+.alert-success-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.25);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  color: #4ade80;
+  margin-bottom: 1rem;
+
+  i { font-size: 1.5rem; }
+  strong { color: #4ade80; }
+  small { color: rgba(255,255,255,0.5); }
+}

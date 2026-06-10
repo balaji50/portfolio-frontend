@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg fixed-top" [class.scrolled]="scrolled">
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="#hero" (click)="scrollTo('#hero'); $event.preventDefault()">
+      <span class="brand-dot">●</span> {{ name }}
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" (click)="menuOpen = !menuOpen"
+      [attr.aria-expanded]="menuOpen" aria-label="Toggle navigation">
+      <i class="bi" [class.bi-list]="!menuOpen" [class.bi-x-lg]="menuOpen"></i>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" [class.show]="menuOpen">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item" *ngFor="let link of navLinks">
+          <a class="nav-link px-3" [href]="link.href"
+            (click)="scrollTo(link.href); $event.preventDefault()">
+            {{ link.label }}
+          </a>
+        </li>
+      </ul>
+      <a class="btn btn-outline-accent ms-3" href="#contact"
+        (click)="scrollTo('#contact'); $event.preventDefault()">
+        Hire Me
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,95 @@
+// ── Google Fonts ─────────────────────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+// ── Bootstrap ────────────────────────────────────────────────────────────────
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// ── Design Tokens ─────────────────────────────────────────────────────────────
+:root {
+  --bg-dark:      #060d18;
+  --bg-subtle:    #0a1323;
+  --card-bg:      rgba(255,255,255,0.03);
+  --border:       rgba(255,255,255,0.07);
+  --accent:       #06b6d4;        /* electric cyan */
+  --accent-hover: #0891b2;
+  --accent-glow:  rgba(6,182,212,0.18);
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
+// ── Base ─────────────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-dark);
+  color: rgba(255,255,255,0.85);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+// ── Shared section styles ─────────────────────────────────────────────────────
+.section-padding { padding: 6rem 0; }
+
+.bg-subtle { background: var(--bg-subtle); }
+
+.text-accent { color: var(--accent) !important; }
+
+.section-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  color: rgba(255,255,255,0.45);
+  font-size: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+// ── Scrollbar ─────────────────────────────────────────────────────────────────
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+// ── Selection ─────────────────────────────────────────────────────────────────
+::selection { background: rgba(99,102,241,0.35); color: #fff; }
+
+// ── Bootstrap overrides ───────────────────────────────────────────────────────
+.spinner-border.text-accent { color: var(--accent) !important; }
+
+// ── Top Loading Bar ───────────────────────────────────────────────────────────
+.top-loading-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 9999;
+  background: linear-gradient(90deg, var(--accent), #67e8f9, var(--accent));
+  background-size: 200%;
+  animation: loadingBar 1.2s linear infinite;
+}
+
+@keyframes loadingBar {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

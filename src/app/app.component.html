@@ -1,0 +1,17 @@
+<!-- Top loading bar -->
+<div class="top-loading-bar" *ngIf="isLoading$ | async"></div>
+
+<app-navbar></app-navbar>
+
+<main>
+  <app-hero></app-hero>
+  <app-about></app-about>
+  <app-projects></app-projects>
+  <app-skills></app-skills>
+  <app-contact></app-contact>
+</main>
+
+<app-footer></app-footer>
+
+<!-- Global toast notifications -->
+<app-toast></app-toast>

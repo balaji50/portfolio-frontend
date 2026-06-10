@@ -1,0 +1,42 @@
+<div class="modal-overlay" *ngIf="project" (click)="onOverlayClick($event)">
+  <div class="modal-panel">
+
+    <!-- Close button -->
+    <button class="modal-close" (click)="close()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <!-- Image -->
+    <div class="modal-image" *ngIf="project.imageUrl">
+      <img [src]="project.imageUrl" [alt]="project.title">
+      <span class="modal-badge" *ngIf="project.featured">
+        <i class="bi bi-star-fill"></i> Featured
+      </span>
+    </div>
+
+    <!-- Content -->
+    <div class="modal-body">
+      <span class="modal-category">{{ project.category }}</span>
+      <h2 class="modal-title">{{ project.title }}</h2>
+      <p class="modal-desc">{{ project.longDesc || project.description }}</p>
+
+      <!-- Tech stack -->
+      <div class="modal-tech mt-3 mb-4">
+        <span class="tech-tag" *ngFor="let t of project.tech">{{ t }}</span>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions d-flex flex-wrap gap-3">
+        <a [href]="project.liveUrl" target="_blank" class="btn-modal-primary"
+          *ngIf="project.liveUrl">
+          <i class="bi bi-box-arrow-up-right me-2"></i> Live Demo
+        </a>
+        <a [href]="project.githubUrl" target="_blank" class="btn-modal-outline"
+          *ngIf="project.githubUrl">
+          <i class="bi bi-github me-2"></i> Source Code
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

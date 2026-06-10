@@ -1,0 +1,12 @@
+// App-level global overrides and loading bar
+:host { display: block; }
+
+// Global page transition
+router-outlet + * {
+  animation: pageIn 0.35s ease both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}

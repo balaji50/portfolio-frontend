@@ -1,0 +1,73 @@
+<section id="hero" class="hero-section d-flex align-items-center">
+  <!-- Background grid -->
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="container position-relative">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-8 col-xl-7">
+
+        <div class="hero-badge mb-4">
+          <span class="badge-dot"></span>
+          Available for opportunities
+        </div>
+
+        <h1 class="hero-name mb-2">
+          Hi, I'm <span class="text-accent">{{ name }}</span>
+        </h1>
+
+        <div class="hero-typewriter mb-4">
+          <span class="typed-text">{{ currentRole }}</span>
+          <span class="cursor">|</span>
+        </div>
+
+        <p class="hero-bio mb-5">{{ bio }}</p>
+
+        <div class="hero-actions d-flex flex-wrap gap-3">
+          <button class="btn btn-accent btn-lg"
+            (click)="scrollTo('#projects')">
+            <i class="bi bi-grid-3x3-gap me-2"></i> View Work
+          </button>
+          <button class="btn btn-ghost btn-lg"
+            (click)="scrollTo('#contact')">
+            <i class="bi bi-send me-2"></i> Get In Touch
+          </button>
+        </div>
+
+        <div class="hero-social mt-5 d-flex gap-3" *ngIf="github || linkedin">
+          <a [href]="github" target="_blank" class="social-link" *ngIf="github">
+            <i class="bi bi-github"></i>
+          </a>
+          <a [href]="linkedin" target="_blank" class="social-link" *ngIf="linkedin">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Stats cards -->
+      <div class="col-lg-4 d-none d-lg-flex justify-content-end">
+        <div class="stats-stack">
+          <div class="stat-card">
+            <span class="stat-number">1+</span>
+            <span class="stat-label">Years Exp.</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">2+</span>
+            <span class="stat-label">Clients</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>

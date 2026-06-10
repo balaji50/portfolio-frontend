@@ -1,0 +1,13 @@
+<div class="toast-container">
+  <div
+    *ngFor="let t of toastService.toasts | async; trackBy: trackById"
+    class="toast-item"
+    [class]="'toast-' + t.type"
+    (click)="toastService.dismiss(t.id)">
+    <i class="bi" [ngClass]="iconFor(t.type)"></i>
+    <span>{{ t.message }}</span>
+    <button class="toast-close" (click)="toastService.dismiss(t.id)">
+      <i class="bi bi-x"></i>
+    </button>
+  </div>
+</div>
