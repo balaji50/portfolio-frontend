@@ -7,7 +7,7 @@ import { PortfolioService } from '../../services/portfolio.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  name = 'Portfolio';
+  name = 'PORTFOLIO';
   scrolled = false;
   menuOpen = false;
 
@@ -22,9 +22,9 @@ export class NavbarComponent implements OnInit {
   constructor(private portfolioService: PortfolioService) {}
 
   ngOnInit(): void {
-    this.portfolioService.profile$.subscribe(p => {
-      if (p) this.name = p.name.split(' ')[0] + '.dev';
-    });
+    // this.portfolioService.profile$.subscribe(p => {
+    //   if (p) this.name = p.name.split(' ')[0];
+    // });
   }
 
   @HostListener('window:scroll')
