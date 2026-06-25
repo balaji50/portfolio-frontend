@@ -57,4 +57,53 @@
       color: #0a0a14;
     }
   }
+
+  // ── Mobile dropdown panel ──────────────────────────────────────────────
+  // Below the lg breakpoint, Bootstrap's .navbar-collapse has no
+  // positioning of its own, so when it opens it just expands inline
+  // inside the fixed-top navbar and overlaps the hero content below it.
+  // Give it its own floating panel instead.
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 20, 0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+      padding: 1rem 1.25rem 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.25s ease;
+
+      &.show {
+        max-height: 80vh;
+        opacity: 1;
+        overflow-y: auto;
+      }
+    }
+
+    .navbar-nav {
+      gap: 0.25rem !important;
+    }
+
+    .nav-link {
+      padding: 0.65rem 0.75rem !important;
+      border-radius: 8px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    .btn-outline-accent {
+      margin: 0.75rem 0 0 !important;
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+    }
+  }
 }

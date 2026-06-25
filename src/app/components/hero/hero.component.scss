@@ -3,7 +3,32 @@
   overflow: hidden;
   background: var(--bg-dark);
   min-height: 100vh;
-  margin-top: 8%;
+  // Fixed navbar sits on top of the page (position: fixed), so it's
+  // removed from normal flow. Without top padding here, hero content
+  // (and on mobile, the open nav-collapse panel) starts underneath it.
+  // Use padding instead of min-vh-100 + margin-top so spacing stays
+  // correct on every screen size instead of scaling off viewport width.
+  padding-top: 96px;
+
+  @media (max-width: 991.98px) {
+    padding-top: 84px;
+  }
+
+  @media (max-width: 575.98px) {
+    padding-top: 76px;
+  }
+
+  .hero-row {
+    min-height: calc(100vh - 96px);
+
+    @media (max-width: 991.98px) {
+      min-height: calc(100vh - 84px);
+    }
+
+    @media (max-width: 575.98px) {
+      min-height: calc(100vh - 76px);
+    }
+  }
 
   .hero-grid {
     position: absolute; inset: 0;
@@ -168,6 +193,25 @@
       height: 40px;
       background: linear-gradient(to bottom, var(--accent), transparent);
       animation: scrollDown 1.5s ease-in-out infinite;
+    }
+  }
+
+  // ── Small phone refinements ──────────────────────────────────────────
+  @media (max-width: 575.98px) {
+    padding-bottom: 3rem;
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .scroll-hint {
+      display: none; // avoid extra clutter at the bottom of short screens
     }
   }
 }

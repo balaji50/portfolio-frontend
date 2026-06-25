@@ -1,0 +1,27 @@
+.site-footer {
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.5rem 0;
+
+  .brand {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+  }
+
+  // Mobile: stack the three items and center them instead of
+  // squeezing brand / built-with / copyright onto one line.
+  @media (max-width: 575.98px) {
+    text-align: center;
+
+    .d-flex {
+      flex-direction: column;
+      gap: 0.5rem !important;
+    }
+  }
+}
